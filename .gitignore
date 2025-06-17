@@ -1,0 +1,40 @@
+# ───────────────────────────────────────────
+# Gradle 캐시 & 빌드 결과
+.gradle/
+build/
+android/.gradle/
+android/build/
+android/app/build/
+
+# 로컬 설정 (SDK 경로 등)
+local.properties
+android/local.properties
+
+# 로그 / OS 파일
+*.log
+
+# Android Studio 가 생성하는 폴더 및 파일
+captures/
+.externalNativeBuild/
+.cxx/
+*.iml
+.idea/
+misc.xml
+deploymentTargetDropDown.xml
+render.experimental.xml
+
+# 배포용 번들 / APK
+*.aab
+*.apk
+output-metadata.json
+
+# 키스토어
+*.jks
+*.keystore
+
+# Google Services (예: Firebase)
+google-services.json
+
+# 프로파일링 힙덤프
+*.hprof
+# ───────────────────────────────────────────
