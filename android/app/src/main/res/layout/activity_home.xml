@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical"
+    android:padding="0dp">
+
+    <!-- 상단 왼쪽 이미지 추가 -->
+    <ImageView
+        android:id="@+id/logoImage"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:src="@drawable/logo"
+        android:scaleType="fitCenter"
+        android:contentDescription="앱 로고" />
+
+    <!-- 버튼 영역 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingTop="0dp">
+
+        <Button
+            android:id="@+id/btnDictionary"
+            android:layout_width="240dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="60dp"
+            android:backgroundTint="#ADD8E6"
+            android:text="🔍 점자사전"
+            android:textColor="#000000"
+            android:textSize="35sp" />
+
+        <Button
+            android:id="@+id/btnVoice"
+            android:layout_width="240dp"
+            android:layout_height="100dp"
+            android:layout_marginBottom="60dp"
+            android:backgroundTint="#ADD8E6"
+            android:text="🎙 음성인식"
+            android:textColor="#000000"
+            android:textSize="35sp" />
+
+        <Button
+            android:id="@+id/btnQuiz"
+            android:layout_width="240dp"
+            android:layout_height="100dp"
+            android:backgroundTint="#ADD8E6"
+            android:text="❓ 퀴즈"
+            android:textColor="#000000"
+            android:textSize="35sp" />
+    </LinearLayout>
+
+    <!-- 하단 네비게이션 바 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#DDDDDD"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/btnHome"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:contentDescription="홈"
+            android:padding="8dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/home" />
+
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:contentDescription="뒤로가기"
+            android:padding="8dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/arrow_back" />
+
+    </LinearLayout>
+
+
+</LinearLayout>
