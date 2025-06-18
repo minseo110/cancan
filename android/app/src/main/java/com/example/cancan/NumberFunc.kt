@@ -1,7 +1,7 @@
 package com.example.cancan
 
 object NumberFunc {
-    val number_braille = "⠬"
+    val number_braille = "⠼"
 
     val number_braille_dict = mapOf(
         "⠚" to "0", // ⠪ = ⠚
@@ -17,7 +17,7 @@ object NumberFunc {
     )
 
     val number_punctuation_invalid = listOf("~", " ", "⠀") // ⠀ = blank braille (⠀)
-    val number_punctuation_valid = listOf(":", "-", ".", "·", "⠢", "⠐", "⠤")
+    val number_punctuation_valid = listOf(":", "-", ".", "·", "⠲", "⠐","⠤")
 
     fun changeToNumber(c: String): String {
         return number_braille_dict[c] ?: c

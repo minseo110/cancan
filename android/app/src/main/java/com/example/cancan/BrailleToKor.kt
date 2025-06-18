@@ -46,18 +46,18 @@ class BrailleToKor {
         var jungI = 0
         var jongI = 0
 
-        for (i in KorData.CHO.indices) {
-            if (KorData.CHO[i] == c1) choI = i
+        for (i in CHO.indices) {
+            if (CHO[i] == c1) choI = i
         }
         val choValue = choI * 21 * 28
 
-        for (i in KorData.JUNG.indices) {
-            if (KorData.JUNG[i] == c2) jungI = i
+        for (i in JUNG.indices) {
+            if (JUNG[i] == c2) jungI = i
         }
         val jungValue = jungI * 28
 
-        for (i in KorData.JONG.indices) {
-            if (KorData.JONG[i] == c3) jongI = i
+        for (i in JONG.indices) {
+            if (JONG[i] == c3) jongI = i
         }
         val jongValue = if (jongI == 0) 0 else jongI
 
@@ -86,11 +86,11 @@ class BrailleToKor {
         var last = brailleWord.length - 1
 
         // 단어 자체가 약어라면 바로 점자로 번역해서 리턴
-        if (BrailleData.abb_word_dict.containsKey(word)) {
-            wordResult += BrailleData.abb_word_dict[word]
+        if (abb_word_dict.containsKey(word)) {
+            wordResult += abb_word_dict[word]
             return wordResult
         } else {
-            for ((key, value) in BrailleData.abb_word_dict) {
+            for ((key, value) in abb_word_dict) {
                 if (word.contains(key)) {
                     abbBraille = key
                     abbKor = value
@@ -151,7 +151,7 @@ class BrailleToKor {
                 continue
             }
 
-            if (letter == "⠠" && BrailleData.abb_cho_jung_jong_dict.containsKey(letterBack + letterBackBack)) {
+            if (letter == "⠠" && abb_cho_jung_jong_dict.containsKey(letterBack + letterBackBack)) {
                 cho = "ㄲ"
                 jung = "ㅓ"
                 jong = "ㅅ"
@@ -161,7 +161,7 @@ class BrailleToKor {
                 flag14 = true
                 i++
                 continue
-            } else if (!selectedCho && BrailleData.abb_cho_jung_jong_dict.containsKey(letter + letterBack)) {
+            } else if (!selectedCho && abb_cho_jung_jong_dict.containsKey(letter + letterBack)) {
                 cho = "ㄱ"
                 jung = "ㅓ"
                 jong = "ㅅ"
@@ -180,55 +180,55 @@ class BrailleToKor {
 
             // 초성 처리
             if (!selectedCho) {
-                if (BrailleData.JUNG_braille.containsKey(letter)) {
+                if (JUNG_braille.containsKey(letter)) {
                     cho = "ㅇ"
                     selectedCho = true
                     selectedJung = true
 
-                    if (i < last && BrailleData.double_JUNG_braille.containsKey(letter + letterBack)) {
-                        jung = BrailleData.double_JUNG_braille[letter + letterBack] ?: ""
-                        if (i < last - 1 && !BrailleData.JONG_braille.containsKey(letterBackBack)) {
+                    if (i < last && double_JUNG_braille.containsKey(letter + letterBack)) {
+                        jung = double_JUNG_braille[letter + letterBack] ?: ""
+                        if (i < last - 1 && !JONG_braille.containsKey(letterBackBack)) {
                             jong = " "
                             selectedJong = true
                         }
                         i++
                         continue
                     } else {
-                        jung = BrailleData.JUNG_braille[letter] ?: ""
+                        jung = JUNG_braille[letter] ?: ""
                     }
 
-                    if (i < last && !BrailleData.JONG_braille.containsKey(letterBack)) {
+                    if (i < last && !JONG_braille.containsKey(letterBack)) {
                         jong = " "
                         selectedJong = true
                     } else {
                         i++
                         continue
                     }
-                } else if (BrailleData.abb_jung_jong_dict.containsKey(letter)) {
+                } else if (abb_jung_jong_dict.containsKey(letter)) {
                     cho = "ㅇ"
                     selectedCho = true
-                    jung = BrailleData.abb_jung_jong_dict[letter]?.get(0) ?: ""
-                    jong = BrailleData.abb_jung_jong_dict[letter]?.get(1) ?: ""
+                    jung = abb_jung_jong_dict[letter]?.get(0) ?: ""
+                    jong = abb_jung_jong_dict[letter]?.get(1) ?: ""
                     selectedJung = true
                     selectedJong = true
-                    if (i < last && BrailleData.JONG_braille.containsKey(letterBack)) {
-                        jong = BrailleData.double_JONG_braille[jong + letterBack] ?: " "
+                    if (i < last && JONG_braille.containsKey(letterBack)) {
+                        jong = double_JONG_braille[jong + letterBack] ?: " "
                         i++
                         continue
                     }
-                } else if (BrailleData.abb_CHO_braille.containsKey(letter) &&
-                    ((i < last && (BrailleData.CHO_braille.containsKey(letterBack)
-                            || BrailleData.JONG_braille.containsKey(letterBack)
+                } else if (abb_CHO_braille.containsKey(letter) &&
+                    ((i < last && (CHO_braille.containsKey(letterBack)
+                            || JONG_braille.containsKey(letterBack)
                             || letterBack == "⠫" || letterBack == "⠇" || letterBack == "⠤"))
                             || i == last || !letterBackIsBraille)
                 ) {
-                    cho = BrailleData.CHO_braille[letter] ?: ""
+                    cho = CHO_braille[letter] ?: ""
                     jung = "ㅏ"
                     selectedCho = true
                     selectedJung = true
 
                     if (letterBack == "⠌") {
-                        if (i < last - 1 && BrailleData.JONG_braille.containsKey(letterBackBack)) {
+                        if (i < last - 1 && JONG_braille.containsKey(letterBackBack)) {
                             jung = "ㅖ"
                             yeJong = true
                             i++
@@ -247,12 +247,12 @@ class BrailleToKor {
                     } else if (letterBack == "⠤") {
                         jong = " "
                         selectedJong = true
-                    } else if (!BrailleData.JONG_braille.containsKey(letterBack)) {
+                    } else if (!JONG_braille.containsKey(letterBack)) {
                         jong = " "
                         selectedJong = true
                     }
-                } else if (BrailleData.abb_cho_dict.containsKey(letter)) {
-                    cho = BrailleData.abb_cho_dict[letter]?.get(0) ?: ""
+                } else if (abb_cho_dict.containsKey(letter)) {
+                    cho = abb_cho_dict[letter]?.get(0) ?: ""
                     jung = "ㅏ"
                     selectedCho = true
                     selectedJung = true
@@ -263,18 +263,18 @@ class BrailleToKor {
                         selectedJong = true
                         i++
                         continue
-                    } else if (!BrailleData.JONG_braille.containsKey(letterBack)) {
+                    } else if (!JONG_braille.containsKey(letterBack)) {
                         jong = " "
                         selectedJong = true
                     }
                 } else if (letter == "⠠") {
                     if (letterBack in BrailleData.abb_CHO_braille.keys &&
-                        ((i < last - 1 && (BrailleData.CHO_braille.containsKey(letterBackBack)
-                                || BrailleData.JONG_braille.containsKey(letterBackBack)
+                        ((i < last - 1 && (CHO_braille.containsKey(letterBackBack)
+                                || JONG_braille.containsKey(letterBackBack)
                                 || letterBackBack == "⠫" || letterBackBack == "⠇"))
                                 || i + 1 == last || !letterBackBackIsBraille)
                     ) {
-                        cho = BrailleData.CHO_braille[letter + letterBack] ?: " "
+                        cho = CHO_braille[letter + letterBack] ?: " "
                         jung = "ㅏ"
                         selectedCho = true
                         selectedJung = true
@@ -282,33 +282,33 @@ class BrailleToKor {
                             jong = "ㅆ"
                             i++
                             continue
-                        } else if (!BrailleData.JONG_braille.containsKey(letterBackBack)) {
+                        } else if (!JONG_braille.containsKey(letterBackBack)) {
                             jong = " "
                             selectedJong = true
                         }
-                    } else if (BrailleData.abb_cho_dict.containsKey(letter + letterBack)) {
-                        cho = BrailleData.abb_cho_dict[letter + letterBack]?.get(0) ?: " "
-                        jung = BrailleData.abb_cho_dict[letter + letterBack]?.get(1) ?: " "
+                    } else if (abb_cho_dict.containsKey(letter + letterBack)) {
+                        cho = abb_cho_dict[letter + letterBack]?.get(0) ?: " "
+                        jung = abb_cho_dict[letter + letterBack]?.get(1) ?: " "
                         selectedCho = true
                         selectedJung = true
                         if (letterBackBack == "⠌") {
                             jong = "ㅆ"
                         }
-                        if (!BrailleData.JONG_braille.containsKey(letterBackBack)) {
+                        if (!JONG_braille.containsKey(letterBackBack)) {
                             jong = " "
                             selectedJong = true
                         }
-                    } else if (!BrailleData.CHO_braille.containsKey(letterBack)) {
-                        cho = BrailleData.CHO_braille[letter] ?: " "
+                    } else if (!CHO_braille.containsKey(letterBack)) {
+                        cho = CHO_braille[letter] ?: " "
                         selectedCho = true
-                    } else if (BrailleData.CHO_braille.containsKey(letterBack)) {
-                        cho = BrailleData.double_CHO_braille[letter + letterBack] ?: " "
+                    } else if (CHO_braille.containsKey(letterBack)) {
+                        cho = double_CHO_braille[letter + letterBack] ?: " "
                         selectedCho = true
                     }
                     i++
                     continue
-                } else if (BrailleData.CHO_braille.containsKey(letter)) {
-                    cho = BrailleData.CHO_braille[letter] ?: ""
+                } else if (CHO_braille.containsKey(letter)) {
+                    cho = CHO_braille[letter] ?: ""
                     selectedCho = true
                 } else {
                     i++
@@ -318,31 +318,31 @@ class BrailleToKor {
 
             // 중성 처리
             if (selectedCho && !selectedJung) {
-                if (BrailleData.abb_jung_jong_dict.containsKey(letter)) {
-                    jung = BrailleData.abb_jung_jong_dict[letter]?.get(0) ?: ""
-                    jong = BrailleData.abb_jung_jong_dict[letter]?.get(1) ?: ""
+                if (abb_jung_jong_dict.containsKey(letter)) {
+                    jung = abb_jung_jong_dict[letter]?.get(0) ?: ""
+                    jong = abb_jung_jong_dict[letter]?.get(1) ?: ""
                     selectedJung = true
                     selectedJong = true
-                    if ((jong + letterBack) in BrailleData.double_JONG_braille.keys) {
-                        jong = BrailleData.double_JONG_braille[jong + letterBack] ?: ""
+                    if ((jong + letterBack) in double_JONG_braille.keys) {
+                        jong = double_JONG_braille[jong + letterBack] ?: ""
                         i++
                         continue
                     }
-                } else if (BrailleData.JUNG_braille.containsKey(letter)) {
-                    jung = BrailleData.JUNG_braille[letter] ?: ""
+                } else if (JUNG_braille.containsKey(letter)) {
+                    jung = JUNG_braille[letter] ?: ""
                     selectedJung = true
-                    if ((letter + letterBack) in BrailleData.double_JUNG_braille.keys) {
-                        jung = BrailleData.double_JUNG_braille[letter + letterBack] ?: ""
-                        if (!BrailleData.JONG_braille.containsKey(letterBackBack)) {
+                    if ((letter + letterBack) in double_JUNG_braille.keys) {
+                        jung = double_JUNG_braille[letter + letterBack] ?: ""
+                        if (!JONG_braille.containsKey(letterBackBack)) {
                             jong = " "
                             selectedJong = true
                         }
                         i++
                         continue
-                    } else if (!BrailleData.JONG_braille.containsKey(letterBack)) {
+                    } else if (!JONG_braille.containsKey(letterBack)) {
                         jong = " "
                         selectedJong = true
-                    } else if (BrailleData.JONG_braille.containsKey(letterBack)) {
+                    } else if (JONG_braille.containsKey(letterBack)) {
                         i++
                         continue
                     }
@@ -351,11 +351,11 @@ class BrailleToKor {
 
             // 종성 처리
             if (selectedCho && selectedJung && !selectedJong) {
-                if (BrailleData.JONG_braille.containsKey(letter)) {
-                    jong = BrailleData.JONG_braille[letter] ?: ""
+                if (JONG_braille.containsKey(letter)) {
+                    jong = JONG_braille[letter] ?: ""
                     selectedJong = true
-                    if ((jong + letterBack) in BrailleData.double_JONG_braille.keys) {
-                        jong = BrailleData.double_JONG_braille[jong + letterBack] ?: ""
+                    if ((jong + letterBack) in double_JONG_braille.keys) {
+                        jong = double_JONG_braille[jong + letterBack] ?: ""
                         i++
                         continue
                     }
@@ -384,9 +384,9 @@ class BrailleToKor {
     fun translation(input: String): String {
         var result = ""
         // 숫자 번역
-        var inputStr = NumberFunc.translateNumber(input)
+        var inputStr = translateNumber(input)
         // 문장부호 번역
-        val punctuationTranslatedWords = PunctuationFunc.translatePunc(input.replace('⠀', ' ').split(" ").toMutableList())
+        val punctuationTranslatedWords = translatePunc(inputStr.replace('⠀', ' ').split(" ").toMutableList())
 
         for (word in punctuationTranslatedWords) {
             var replacedWord = word
