@@ -113,6 +113,18 @@ cancan/
 
 ---
 
+## 팀원
+
+| 역할                | GitHub                                    |
+| ----------------- | ----------------------------------------- |
+| 아두이노 모듈 및 머신러닝 모델 개발       | [minseo110](https://github.com/minseo110) |
+| 아두이노 모듈 및 머신러닝 모델 개발       | [Choi-Bogyeong](https://github.com/Choi-Bogyeong) |
+| 아두이노 모듈 및 Android 앱 개발 및 설계  | [imdohyang](https://github.com/imdohyang) |
+
+---
+
+
+
 ## 라이선스
 
 MIT © 2025 minseo110
@@ -126,3 +138,7 @@ MIT © 2025 minseo110
 * **BrailleToKor Python 모듈** - 원본 로직: [https://github.com/Bridge-NOONGIL/BrailleToKor\_Python](https://github.com/Bridge-NOONGIL/BrailleToKor_Python)
 * **YOLOv5** - 점자 박스 검출: [https://github.com/ultralytics/yolov5](https://github.com/ultralytics/yolov5)
 * **DotNeuralNet 점자 인식 모델** - 학습/테스트 프레임워크: [https://github.com/snoop2head/DotNeuralNet](https://github.com/snoop2head/DotNeuralNet)
+
+
+
+
