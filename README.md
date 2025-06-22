@@ -108,7 +108,7 @@ cancan/
 |  |     └─ layout/
 │  └─ build.gradle
 ├─ arduino/
-│  └─ cancan_module.ino
+│  └─ arduino.ino
 ├─ .gitignore
 └─ README.md
 ```
